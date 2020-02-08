@@ -1,7 +1,23 @@
 import React from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
 
-import Router from 'components/Router';
+import Router from 'Components/Router';
 
-const App = () => <Router isSignedIn={false} />;
+const SIGNIN_STATUS = gql`
+  {
+    isSignedIn @client
+  }
+`;
 
-export default App;
+export default () => {
+  const {
+    data: { isSignedIn }
+  } = useQuery(SIGNIN_STATUS);
+
+  return (
+    <>
+      <Router isSignedIn={isSignedIn} />
+    </>
+  );
+};

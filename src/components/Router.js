@@ -1,18 +1,35 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import Auth from 'Routes/Auth';
-import Contacts from 'Routes/Contacts';
+import Users from 'Routes/Users';
+import Professors from 'Routes/Professors';
+import Notices from 'Routes/Notices';
+import Header from './Header';
 
-const SignedInRoutes = () => <Route exact path='/' component={Contacts} />;
+const SignedInRoutes = () => (
+  <>
+    <Header>
+      <Switch>
+        <Route exact path='/users' component={Users} />
+        <Route exact path='/profs' component={Professors} />
+        <Route exact path='/notices' component={Notices} />
+        <Redirect from='*' to='/users' />
+      </Switch>
+    </Header>
+  </>
+);
 
-const SignedOutRoutes = () => <Route exact path='/' component={Auth} />;
+const SignedOutRoutes = () => (
+  <Switch>
+    <Route exact path='/' component={Auth} />
+    <Redirect from='*' to='/' />
+  </Switch>
+);
 
 const AppRouter = ({ isSignedIn }) => (
-  <Router>
-    <Switch>{isSignedIn ? <SignedInRoutes /> : <SignedOutRoutes />};</Switch>
-  </Router>
+  <>{isSignedIn ? <SignedInRoutes /> : <SignedOutRoutes />}</>
 );
 
 AppRouter.propTypes = {

@@ -23,6 +23,36 @@ const Copyright = () => {
   );
 };
 
+const LoadingCheckButton = ({ loading, loading2 }) => {
+  const classes = useStyles();
+
+  if (loading || loading2) {
+    return (
+      <Button
+        type='submit'
+        fullWidth
+        variant='contained'
+        disabled
+        className={classes.submit}
+      >
+        Loading
+      </Button>
+    );
+  } else {
+    return (
+      <Button
+        type='submit'
+        fullWidth
+        variant='contained'
+        color='primary'
+        className={classes.submit}
+      >
+        Sign In
+      </Button>
+    );
+  }
+};
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -43,7 +73,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default () => {
+export default ({ username, password, loading, mutationLoading, onSubmit }) => {
   const classes = useStyles();
 
   return (
@@ -56,7 +86,7 @@ export default () => {
         <Typography component='h1' variant='h5'>
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={onSubmit}>
           <TextField
             variant='outlined'
             margin='normal'
@@ -67,6 +97,7 @@ export default () => {
             name='username'
             autoComplete='username'
             autoFocus
+            {...username}
           />
           <TextField
             variant='outlined'
@@ -78,20 +109,13 @@ export default () => {
             type='password'
             id='password'
             autoComplete='current-password'
+            {...password}
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
             label='Remember me'
           />
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
+          <LoadingCheckButton loading={loading} loading2={mutationLoading} />
           <Grid container>
             <Grid item xs>
               <Link href='#' variant='body2'>

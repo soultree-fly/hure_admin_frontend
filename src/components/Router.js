@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Auth from 'Routes/Auth/Auth';
+import Auth from 'Routes/Auth';
 import Contacts from 'Routes/Contacts';
 
 const SignedInRoutes = () => <Route exact path='/' component={Contacts} />;

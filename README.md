@@ -8,3 +8,28 @@ Hanyang Univ. Real Estate Graduate School reunion app frontend for Admin
 ```shell
 yarn install
 ```
+
+## Screens
+
+- [x] Auth (Sign In)
+
+---
+
+- [ ] Create user profile
+- [ ] User list
+- [ ] User detail
+- [ ] Edit / Delete user profile
+
+---
+
+- [ ] Create professor profile
+- [ ] Professor list
+- [ ] Professor detail
+- [ ] Edit / Delete professor profile
+
+---
+
+- [ ] Create notice
+- [ ] Notice list
+- [ ] Notice detail
+- [ ] Edit / Delete notice

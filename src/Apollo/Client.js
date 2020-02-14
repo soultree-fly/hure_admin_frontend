@@ -2,9 +2,12 @@ import ApolloClient from 'apollo-boost';
 import { defaults, resolvers } from 'Apollo/LocalState';
 
 export default new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'https://hure-backend.herokuapp.com/',
   clientState: {
     defaults,
     resolvers
+  },
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`
   }
 });

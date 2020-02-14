@@ -15,7 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import { MainListItems } from './ListItems';
+import { MainListItems } from '../ListItems';
 
 const Copyright = () => {
   return (
@@ -113,7 +113,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default ({ children }) => {
+export default ({ children, onSignOutClick }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -151,7 +151,9 @@ export default ({ children }) => {
                 className={classes.img}
               />
             </div>
-            <Button color='inherit'>Sign Out</Button>
+            <Button color='inherit' onClick={onSignOutClick}>
+              Sign Out
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer

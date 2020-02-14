@@ -6,7 +6,7 @@ import Auth from 'Routes/Auth';
 import Users from 'Routes/Users';
 import Professors from 'Routes/Professors';
 import Notices from 'Routes/Notices';
-import Header from './Header';
+import Header from './Header/HeaderPresenter';
 
 const SignedInRoutes = () => (
   <>

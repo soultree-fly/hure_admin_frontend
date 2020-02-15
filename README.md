@@ -29,6 +29,13 @@ yarn install
 
 ---
 
+- [ ] Create graduated year
+- [x] Graduated year list
+- [ ] Graduated year detail
+- [ ] Edit / Delete graduated year
+
+---
+
 - [ ] Create notice
 - [ ] Notice list
 - [ ] Notice detail

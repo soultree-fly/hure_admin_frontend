@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import { UsersIcon, ProfessorIcon, NoticeIcon } from './Icons';
+import { UsersIcon, ProfessorIcon, NoticeIcon, GraduateIcon } from '../Icons';
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -31,6 +31,14 @@ export const MainListItems = () => {
             <ProfessorIcon />
           </ListItemIcon>
           <ListItemText primary='Professors' />
+        </ListItem>
+      </Link>
+      <Link to='/gradyears' className={classes.link}>
+        <ListItem button>
+          <ListItemIcon>
+            <GraduateIcon />
+          </ListItemIcon>
+          <ListItemText primary='Graduated Years' />
         </ListItem>
       </Link>
       <Link to='/notices' className={classes.link}>

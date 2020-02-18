@@ -7,7 +7,7 @@ import Users from 'Routes/Users';
 import Professors from 'Routes/Professors';
 import GraduatedYears from 'Routes/GraduatedYears';
 import Notices from 'Routes/Notices';
-import Header from './Header/HeaderPresenter';
+import Header from './Header';
 
 const SignedInRoutes = () => (
   <>

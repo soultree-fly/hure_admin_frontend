@@ -8,7 +8,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,16 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { MainListItems } from './ListItems';
-
-const Copyright = () => {
-  return (
-    <Typography variant='body2' color='textSecondary' align='center'>
-      {'© '}
-      {new Date().getFullYear()}
-      {' Tarrazu'}
-    </Typography>
-  );
-};
+import Copyright from 'Components/Copyright';
 
 const drawerWidth = 240;
 

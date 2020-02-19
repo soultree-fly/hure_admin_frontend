@@ -74,7 +74,7 @@ const Loader = () => (
 export default () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState();
-  const limit = 3;
+  const limit = 10;
   const [getUsers, { data, loading }] = useLazyQuery(SEE_ALL_USER, {
     variables: { limit, page }
   });
@@ -124,11 +124,13 @@ export default () => {
           </Table>
         </TableContainer>
         {!loading && lastPage && page && (
-          <Pagination
-            count={lastPage}
-            page={page}
-            onChange={handlePageChange}
-          />
+          <Grid justify='center'>
+            <Pagination
+              count={lastPage}
+              page={page}
+              onChange={handlePageChange}
+            />
+          </Grid>
         )}
       </Grid>
     </Grid>

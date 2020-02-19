@@ -15,7 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { MainListItems } from './ListItems';
-import Copyright from 'Components/Copyright';
+import Copyright from 'components/Copyright';
 
 const drawerWidth = 240;
 

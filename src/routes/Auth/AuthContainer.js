@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
-import useInput from 'Hooks/useInput';
+import useInput from 'hooks/useInput';
 import { SIGN_IN, LOCAL_SIGN_IN } from './AuthQueries';
 import AuthPresenter from './AuthPresenter';
 

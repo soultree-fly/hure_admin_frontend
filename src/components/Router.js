@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Auth from 'Routes/Auth';
-import Users from 'Routes/Users';
-import Professors from 'Routes/Professors';
-import GraduatedYears from 'Routes/GraduatedYears';
-import Notices from 'Routes/Notices';
+import Auth from 'routes/Auth';
+import Users from 'routes/Users';
+import Professors from 'routes/Professors';
+import GraduatedYears from 'routes/GraduatedYears';
+import Notices from 'routes/Notices';
 import Header from './Header';
 
 const SignedInRoutes = () => (

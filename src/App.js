@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import GlobalStyles from 'Styles/GlobalStyles';
-import Routes from 'Components/Router';
+import Routes from 'components/Router';
 
 const SIGNIN_STATUS = gql`
   {

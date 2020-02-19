@@ -13,7 +13,6 @@ const SignedInRoutes = () => (
   <>
     <Header>
       <Switch>
-        <Route path='/users/page/:page' component={Users} />
         <Route path='/users' component={Users} />
         <Route exact path='/profs' component={Professors} />
         <Route exact path='/gradyears' component={GraduatedYears} />

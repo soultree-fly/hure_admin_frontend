@@ -124,7 +124,7 @@ export default () => {
           </Table>
         </TableContainer>
         {!loading && lastPage && page && (
-          <Grid justify='center'>
+          <Grid container justify='center'>
             <Pagination
               count={lastPage}
               page={page}

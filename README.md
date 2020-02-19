@@ -16,7 +16,7 @@ yarn install
 ---
 
 - [ ] Create user profile
-- [ ] User list
+- [x] User list
 - [ ] User detail
 - [ ] Edit / Delete user profile
 

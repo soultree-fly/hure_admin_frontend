@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
 import Paper from '@material-ui/core/Paper';
@@ -44,6 +45,10 @@ const SEE_ALL_USER = gql`
 `;
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3)
+  },
   table: {
     minWidth: 650
   }
@@ -90,49 +95,51 @@ export default () => {
   };
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography component='h2' variant='h6' color='primary' gutterBottom>
-          Users
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell>이름</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Phone</TableCell>
-                <TableCell>학과</TableCell>
-                <TableCell>기수</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {loading && <Loader />}
-              {!loading &&
-                data &&
-                data.seeAllUser &&
-                data.seeAllUser.map(row => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell>{row.email}</TableCell>
-                    <TableCell>{row.cellPhone}</TableCell>
-                    <TableCell>{row.major.name}</TableCell>
-                    <TableCell>{row.graduatedYear.generation}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {!loading && lastPage && page && (
-          <Grid container justify='center'>
-            <Pagination
-              count={lastPage}
-              page={page}
-              onChange={handlePageChange}
-            />
-          </Grid>
-        )}
+    <Container maxWidth='lg' className={classes.container}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography component='h2' variant='h6' color='primary' gutterBottom>
+            Users
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>이름</TableCell>
+                  <TableCell>Email</TableCell>
+                  <TableCell>Phone</TableCell>
+                  <TableCell>학과</TableCell>
+                  <TableCell>기수</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {loading && <Loader />}
+                {!loading &&
+                  data &&
+                  data.seeAllUser &&
+                  data.seeAllUser.map(row => (
+                    <TableRow key={row.id}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.email}</TableCell>
+                      <TableCell>{row.cellPhone}</TableCell>
+                      <TableCell>{row.major.name}</TableCell>
+                      <TableCell>{row.graduatedYear.generation}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          {!loading && lastPage && page && (
+            <Grid container justify='center'>
+              <Pagination
+                count={lastPage}
+                page={page}
+                onChange={handlePageChange}
+              />
+            </Grid>
+          )}
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };

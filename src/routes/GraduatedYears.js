@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -27,6 +28,10 @@ const SEE_ALL_GRAD_YEAR = gql`
 `;
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3)
+  },
   table: {
     minWidth: 650
   }
@@ -53,36 +58,38 @@ export default () => {
   const { data, loading } = useQuery(SEE_ALL_GRAD_YEAR);
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12}>
-        <Typography component='h2' variant='h6' color='primary' gutterBottom>
-          Graduated Years
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Generation</TableCell>
-                <TableCell>Year</TableCell>
-                <TableCell>Semester</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {loading && <Loader />}
-              {!loading &&
-                data &&
-                data.seeAllGradYear &&
-                data.seeAllGradYear.map(row => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.generation}</TableCell>
-                    <TableCell>{row.year}</TableCell>
-                    <TableCell>{row.semester}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+    <Container maxWidth='lg' className={classes.container}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Typography component='h2' variant='h6' color='primary' gutterBottom>
+            Graduated Years
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Generation</TableCell>
+                  <TableCell>Year</TableCell>
+                  <TableCell>Semester</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {loading && <Loader />}
+                {!loading &&
+                  data &&
+                  data.seeAllGradYear &&
+                  data.seeAllGradYear.map(row => (
+                    <TableRow key={row.id}>
+                      <TableCell>{row.generation}</TableCell>
+                      <TableCell>{row.year}</TableCell>
+                      <TableCell>{row.semester}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };

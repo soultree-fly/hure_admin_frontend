@@ -137,6 +137,7 @@ export default args => {
               <TextField
                 variant='outlined'
                 margin='none'
+                required
                 fullWidth
                 id='order'
                 label='순서'

@@ -6,7 +6,8 @@ import Auth from 'routes/Auth';
 import Users from 'routes/Users';
 import NewProfessor from 'routes/prof/NewProfessor';
 import Professors from 'routes/prof/Professors';
-import GraduatedYears from 'routes/GraduatedYears';
+import NewGradYears from 'routes/gradyears/NewGradYears';
+import GraduatedYears from 'routes/gradyears/GraduatedYears';
 import Notices from 'routes/Notices';
 import Header from './Header';
 
@@ -17,7 +18,8 @@ const SignedInRoutes = () => (
         <Route path='/users' component={Users} />
         <Route path='/profs/new' component={NewProfessor} />
         <Route path='/profs' component={Professors} />
-        <Route exact path='/gradyears' component={GraduatedYears} />
+        <Route path='/gradyears/new' component={NewGradYears} />
+        <Route path='/gradyears' component={GraduatedYears} />
         <Route exact path='/notices' component={Notices} />
         <Redirect from='*' to='/users' />
       </Switch>

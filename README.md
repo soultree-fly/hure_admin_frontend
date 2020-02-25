@@ -22,14 +22,14 @@ yarn install
 
 ---
 
-- [ ] Create professor profile
-- [ ] Professor list
+- [x] Create professor profile
+- [x] Professor list
 - [ ] Professor detail
 - [ ] Edit / Delete professor profile
 
 ---
 
-- [ ] Create graduated year
+- [x] Create graduated year
 - [x] Graduated year list
 - [ ] Graduated year detail
 - [ ] Edit / Delete graduated year

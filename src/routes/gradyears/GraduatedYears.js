@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -29,11 +31,18 @@ const SEE_ALL_GRAD_YEAR = gql`
 
 const useStyles = makeStyles(theme => ({
   container: {
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3)
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4)
+  },
+  tableContainer: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1)
   },
   table: {
     minWidth: 650
+  },
+  button: {
+    paddingTop: theme.spacing(2)
   }
 }));
 
@@ -58,12 +67,12 @@ export default () => {
   const { data, loading } = useQuery(SEE_ALL_GRAD_YEAR);
 
   return (
-    <Container maxWidth='lg' className={classes.container}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography component='h2' variant='h6' color='primary' gutterBottom>
-            Graduated Years
-          </Typography>
+    <>
+      <Container maxWidth='lg' className={classes.container}>
+        <Typography component='h2' variant='h6' color='primary' gutterBottom>
+          기수
+        </Typography>
+        <Grid container className={classes.tableContainer}>
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableHead>
@@ -89,7 +98,14 @@ export default () => {
             </Table>
           </TableContainer>
         </Grid>
-      </Grid>
-    </Container>
+        <Grid container justify='flex-end' className={classes.button}>
+          <Link to='/gradyears/new'>
+            <Button variant='contained' color='primary'>
+              기수 추가
+            </Button>
+          </Link>
+        </Grid>
+      </Container>
+    </>
   );
 };

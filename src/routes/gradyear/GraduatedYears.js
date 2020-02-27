@@ -14,7 +14,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { useStyles } from 'Styles/TableStyles';
 
 const SEE_ALL_GRAD_YEAR = gql`
   {
@@ -28,23 +29,6 @@ const SEE_ALL_GRAD_YEAR = gql`
     }
   }
 `;
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
-  },
-  tableContainer: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
-  },
-  table: {
-    minWidth: 650
-  },
-  button: {
-    paddingTop: theme.spacing(2)
-  }
-}));
 
 const Loader = () => (
   <>

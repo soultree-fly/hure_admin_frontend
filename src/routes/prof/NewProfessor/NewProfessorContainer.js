@@ -74,12 +74,12 @@ export default () => {
         setAxiosLoading(false);
         await addProf({
           variables: {
-            name: name.value,
-            email: email.value,
-            workPhone: workPhone.value,
-            position: position.value,
-            title: title.value,
-            company: company.value,
+            name: name.value !== '' ? name.value : null,
+            email: email.value !== '' ? email.value : null,
+            workPhone: workPhone.value !== '' ? workPhone.value : null,
+            position: position.value !== '' ? position.value : null,
+            title: title.value !== '' ? title.value : null,
+            company: company.value !== '' ? company.value : null,
             order: parseInt(order.value),
             photo: location
           }
@@ -91,12 +91,12 @@ export default () => {
       try {
         await addProf({
           variables: {
-            name: name.value,
-            email: email.value,
-            workPhone: workPhone.value,
-            position: position.value,
-            title: title.value,
-            company: company.value,
+            name: name.value !== '' ? name.value : null,
+            email: email.value !== '' ? email.value : null,
+            workPhone: workPhone.value !== '' ? workPhone.value : null,
+            position: position.value !== '' ? position.value : null,
+            title: title.value !== '' ? title.value : null,
+            company: company.value !== '' ? company.value : null,
             order: parseInt(order.value)
           }
         });

@@ -4,20 +4,9 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 
+import { useStyles } from 'Styles/NewStyles';
 import Dropzone from 'components/Dropzone';
-
-const useStyles = makeStyles(theme => ({
-  title: {
-    paddingBottom: theme.spacing(2)
-  },
-  root: {
-    flexGrow: 1,
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
-  }
-}));
 
 export default args => {
   const {

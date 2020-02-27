@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Pagination from '@material-ui/lab/Pagination';
@@ -13,7 +15,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { useStyles } from 'Styles/TableStyles';
 
 const SEE_ALL_USER = gql`
   query seeAllUser(
@@ -43,16 +46,6 @@ const SEE_ALL_USER = gql`
     howManyUser
   }
 `;
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3)
-  },
-  table: {
-    minWidth: 650
-  }
-}));
 
 const Loader = () => (
   <>
@@ -86,7 +79,7 @@ export default () => {
   useEffect(() => {
     getUsers();
     if (data && data.howManyUser) {
-      setLastPage(parseInt(data.howManyUser / limit + 1));
+      setLastPage(Math.ceil(data.howManyUser / limit));
     }
   }, [getUsers, data]);
   const classes = useStyles();
@@ -96,11 +89,11 @@ export default () => {
 
   return (
     <Container maxWidth='lg' className={classes.container}>
-      <Grid container spacing={3}>
+      <Typography component='h2' variant='h6' color='primary' gutterBottom>
+        유저
+      </Typography>
+      <Grid container spacing={3} className={classes.tableContainer}>
         <Grid item xs={12}>
-          <Typography component='h2' variant='h6' color='primary' gutterBottom>
-            Users
-          </Typography>
           <TableContainer component={Paper}>
             <Table className={classes.table}>
               <TableHead>
@@ -139,6 +132,13 @@ export default () => {
             </Grid>
           )}
         </Grid>
+      </Grid>
+      <Grid container justify='flex-end' className={classes.button}>
+        <Link to='/users/new'>
+          <Button variant='contained' color='primary'>
+            유저 추가
+          </Button>
+        </Link>
       </Grid>
     </Container>
   );

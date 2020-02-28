@@ -12,33 +12,31 @@ import Typography from '@material-ui/core/Typography';
 import useInput from 'hooks/useInput';
 import { useStyles } from 'Styles/NewStyles';
 
-const CREATE_GRAD_YEAR = gql`
-  mutation createGradYear($year: Int!, $semester: Int!, $generation: Int!) {
-    createGradYear(year: $year, semester: $semester, generation: $generation) {
-      generation
+const CREATE_NOTICE = gql`
+  mutation createNotice($title: String!, $desc: String!) {
+    createNotice(title: $title, desc: $desc) {
+      title
     }
   }
 `;
 
 export default () => {
-  const [addGradYear, { data, loading }] = useMutation(CREATE_GRAD_YEAR);
+  const [addNotice, { data, loading }] = useMutation(CREATE_NOTICE);
 
-  const generation = useInput();
-  const year = useInput();
-  const semester = useInput();
+  const title = useInput('');
+  const desc = useInput('');
 
-  if (data && data.createGradYear && data.createGradYear.generation) {
+  if (data && data.createNotice && data.createNotice.title) {
     toast.success('등록이 완료되었습니다.');
   }
 
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      await addGradYear({
+      await addNotice({
         variables: {
-          year: parseInt(year.value),
-          semester: parseInt(semester.value),
-          generation: parseInt(generation.value)
+          title: title.value,
+          desc: desc.value
         }
       });
     } catch {
@@ -61,56 +59,42 @@ export default () => {
 
   return (
     <>
-      {!loading &&
-        data &&
-        data.createGradYear &&
-        data.createGradYear.generation && <Redirect to='/gradyears' />}
+      {!loading && data && data.createNotice && data.createNotice.title && (
+        <Redirect to='/notices' />
+      )}
       <Container className={classes.root}>
         <Grid className={classes.title} item xs={12}>
           <Typography component='h2' variant='h6' color='primary' gutterBottom>
-            기수 추가
+            공지 추가
           </Typography>
         </Grid>
         <form onSubmit={onSubmit}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12}>
               <TextField
                 variant='outlined'
                 margin='none'
                 required
                 fullWidth
-                id='generation'
-                label='기수'
-                name='generation'
-                autoComplete='generation'
+                id='title'
+                label='제목'
+                name='title'
+                autoComplete='title'
                 autoFocus
-                {...generation}
+                {...title}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12}>
               <TextField
                 variant='outlined'
                 margin='none'
                 required
                 fullWidth
-                id='year'
-                label='연도'
-                name='year'
-                autoComplete='year'
-                {...year}
-              />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <TextField
-                variant='outlined'
-                margin='none'
-                required
-                fullWidth
-                id='semester'
-                label='학기'
-                name='semester'
-                autoComplete='semester'
-                {...semester}
+                id='desc'
+                label='내용'
+                name='desc'
+                multiline
+                {...desc}
               />
             </Grid>
             <Grid item xs='auto' sm={4} />

@@ -10,7 +10,8 @@ import NewProfessor from 'routes/prof/NewProfessor';
 import Professors from 'routes/prof/Professors';
 import NewGradYear from 'routes/gradyear/NewGradYear';
 import GraduatedYears from 'routes/gradyear/GraduatedYears';
-import Notices from 'routes/Notices';
+import NewNotice from 'routes/notice/NewNotice';
+import Notices from 'routes/notice/Notices';
 import Header from './Header';
 
 const SignedInRoutes = () => (
@@ -24,6 +25,7 @@ const SignedInRoutes = () => (
         <Route path='/profs' component={Professors} />
         <Route path='/gradyears/new' component={NewGradYear} />
         <Route path='/gradyears' component={GraduatedYears} />
+        <Route path='/notices/new' component={NewNotice} />
         <Route path='/notices' component={Notices} />
         <Redirect from='*' to='/users' />
       </Switch>

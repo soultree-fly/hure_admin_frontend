@@ -109,13 +109,13 @@ export default () => {
           )}
         </Grid>
       </Grid>
-      {/* <Grid container justify='flex-end' className={classes.button}>
+      <Grid container justify='flex-end' className={classes.button}>
         <Link to='/notices/new'>
           <Button variant='contained' color='primary'>
             공지 추가
           </Button>
         </Link>
-      </Grid> */}
+      </Grid>
     </Container>
   );
 };

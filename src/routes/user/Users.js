@@ -35,7 +35,6 @@ const SEE_ALL_USER = gql`
       name
       email
       cellPhone
-      company
       major {
         name
       }

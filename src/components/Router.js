@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Auth from 'routes/Auth';
 import NewUser from 'routes/user/NewUser';
 import Users from 'routes/user/Users';
+import Requests from 'routes/Requests';
 import NewProfessor from 'routes/prof/NewProfessor';
 import Professors from 'routes/prof/Professors';
 import NewGradYear from 'routes/gradyear/NewGradYear';
@@ -18,11 +19,12 @@ const SignedInRoutes = () => (
       <Switch>
         <Route path='/users/new' component={NewUser} />
         <Route path='/users' component={Users} />
+        <Route path='/requests' component={Requests} />
         <Route path='/profs/new' component={NewProfessor} />
         <Route path='/profs' component={Professors} />
         <Route path='/gradyears/new' component={NewGradYear} />
         <Route path='/gradyears' component={GraduatedYears} />
-        <Route exact path='/notices' component={Notices} />
+        <Route path='/notices' component={Notices} />
         <Redirect from='*' to='/users' />
       </Switch>
     </Header>

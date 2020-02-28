@@ -23,6 +23,13 @@ yarn start
 
 ---
 
+- [ ] Request list
+- [ ] Request detail
+- [ ] Request confirm
+- [ ] Request reject
+
+---
+
 - [x] Create professor profile
 - [x] Professor list
 - [ ] Professor detail
@@ -38,6 +45,6 @@ yarn start
 ---
 
 - [ ] Create notice
-- [ ] Notice list
+- [x] Notice list
 - [ ] Notice detail
 - [ ] Edit / Delete notice

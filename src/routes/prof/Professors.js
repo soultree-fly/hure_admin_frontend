@@ -14,7 +14,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+
+import { useStyles } from 'Styles/TableStyles';
 
 const SEE_ALL_PROF = gql`
   {
@@ -26,19 +27,6 @@ const SEE_ALL_PROF = gql`
     }
   }
 `;
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(3)
-  },
-  table: {
-    minWidth: 650
-  },
-  button: {
-    paddingTop: theme.spacing(2)
-  }
-}));
 
 const Loader = () => (
   <TableRow>
@@ -58,35 +46,40 @@ export default () => {
   const { data, loading } = useQuery(SEE_ALL_PROF);
 
   const classes = useStyles();
+
   return (
     <Container maxWidth='lg' className={classes.container}>
       <Typography component='h2' variant='h6' color='primary' gutterBottom>
-        교수 List
+        교수
       </Typography>
-      <TableContainer component={Paper}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>이름</TableCell>
-              <TableCell>구분</TableCell>
-              <TableCell>직책</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {loading && <Loader />}
-            {!loading &&
-              data &&
-              data.seeAllProf &&
-              data.seeAllProf.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.position}</TableCell>
-                  <TableCell>{row.title}</TableCell>
+      <Grid container spacing={3} className={classes.tableContainer}>
+        <Grid item xs={12}>
+          <TableContainer component={Paper}>
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell>이름</TableCell>
+                  <TableCell>구분</TableCell>
+                  <TableCell>직책</TableCell>
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+              </TableHead>
+              <TableBody>
+                {loading && <Loader />}
+                {!loading &&
+                  data &&
+                  data.seeAllProf &&
+                  data.seeAllProf.map(row => (
+                    <TableRow key={row.id}>
+                      <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.position}</TableCell>
+                      <TableCell>{row.title}</TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Grid>
+      </Grid>
       <Grid container justify='flex-end' className={classes.button}>
         <Link to='/profs/new'>
           <Button variant='contained' color='primary'>

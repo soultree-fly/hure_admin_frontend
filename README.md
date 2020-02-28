@@ -7,6 +7,7 @@ Hanyang Univ. Graduate School of Real Estate Convergence Reunion app frontend fo
 
 ```shell
 yarn install
+yarn start
 ```
 
 ## Screens

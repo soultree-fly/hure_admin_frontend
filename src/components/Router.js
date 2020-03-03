@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Auth from 'routes/Auth';
 import NewUser from 'routes/user/NewUser';
 import Users from 'routes/user/Users';
-import Requests from 'routes/Requests';
+import Requests from 'routes/request/Requests';
 import NewProfessor from 'routes/prof/NewProfessor';
 import Professors from 'routes/prof/Professors';
 import NewGradYear from 'routes/gradyear/NewGradYear';

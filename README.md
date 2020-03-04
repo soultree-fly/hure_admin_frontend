@@ -39,8 +39,7 @@ yarn start
 
 - [x] Create graduated year
 - [x] Graduated year list
-- [ ] Graduated year detail
-- [ ] Edit / Delete graduated year
+- [x] Delete graduated year
 
 ---
 

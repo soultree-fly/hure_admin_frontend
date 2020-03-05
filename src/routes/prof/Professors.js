@@ -80,7 +80,7 @@ export default () => {
           </TableContainer>
         </Grid>
       </Grid>
-      <Grid container justify='flex-end' className={classes.button}>
+      <Grid container justify='flex-end' className={classes.buttonContainer}>
         <Link to='/profs/new'>
           <Button variant='contained' color='primary'>
             교수 추가

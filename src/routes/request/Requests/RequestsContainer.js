@@ -29,11 +29,19 @@ const CONFIRM_REQUESTS = gql`
   }
 `;
 
+const REJECT_REQUESTS = gql`
+  mutation rejectRequests($id: [ID!]!) {
+    rejectRequests(id: $id)
+  }
+`;
+
 export default () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState();
   const limit = 10;
   const [selected, setSelected] = useState([]);
+  const [type, setType] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const [getRequests, { data, loading, refetch }] = useLazyQuery(
     SEE_ALL_REQUEST,
@@ -48,9 +56,14 @@ export default () => {
     }
   }, [getRequests, data]);
 
-  const [confirmRequests, { loading: confirmLoading, error }] = useMutation(
-    CONFIRM_REQUESTS
-  );
+  const [
+    confirmRequests,
+    { loading: confirmLoading, error: confirmError }
+  ] = useMutation(CONFIRM_REQUESTS);
+  const [
+    rejectRequests,
+    { loading: rejectLoading, error: rejectError }
+  ] = useMutation(REJECT_REQUESTS);
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
@@ -85,12 +98,31 @@ export default () => {
     setPage(value);
   };
 
-  const handleButtonClick = async event => {
-    await confirmRequests({ variables: { id: selected } });
-    if (error) toast.error('Upload 실패. 나중에 다시 시도해주십시오.');
-    else {
-      refetch();
-      setSelected([]);
+  const handleConfirmButtonClick = async event => {
+    setType('confirm');
+    setAlertOpen(true);
+  };
+
+  const handleRejectButtonClick = async event => {
+    setType('reject');
+    setAlertOpen(true);
+  };
+
+  const onConfirm = async () => {
+    if (type === 'confirm') {
+      await confirmRequests({ variables: { id: selected } });
+      if (confirmError) toast.error('Upload 실패. 나중에 다시 시도해주십시오.');
+      else {
+        refetch();
+        setSelected([]);
+      }
+    } else if (type === 'reject') {
+      await rejectRequests({ variables: { id: selected } });
+      if (rejectError) toast.error('Delete 실패. 나중에 다시 시도해주십시오.');
+      else {
+        refetch();
+        setSelected([]);
+      }
     }
   };
 
@@ -102,10 +134,16 @@ export default () => {
       lastPage={lastPage}
       selected={selected}
       confirmLoading={confirmLoading}
+      rejectLoading={rejectLoading}
+      alertOpen={alertOpen}
+      setAlertOpen={setAlertOpen}
+      type={type}
       handleSelectAllClick={handleSelectAllClick}
       handleClick={handleClick}
       handlePageChange={handlePageChange}
-      handleButtonClick={handleButtonClick}
+      handleConfirmButtonClick={handleConfirmButtonClick}
+      handleRejectButtonClick={handleRejectButtonClick}
+      onConfirm={onConfirm}
     />
   );
 };

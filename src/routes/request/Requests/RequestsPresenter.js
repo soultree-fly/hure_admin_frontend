@@ -15,6 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 
 import { useStyles } from 'Styles/TableStyles';
+import Alert from 'components/Alert';
 
 const Loader = () => (
   <>
@@ -46,107 +47,137 @@ export default args => {
     lastPage,
     selected,
     confirmLoading,
+    rejectLoading,
+    alertOpen,
+    setAlertOpen,
+    type,
     handleSelectAllClick,
     handleClick,
     handlePageChange,
-    handleButtonClick
+    handleConfirmButtonClick,
+    handleRejectButtonClick,
+    onConfirm
   } = args;
   const classes = useStyles();
 
   const isSelected = id => selected.indexOf(id) !== -1;
 
   return (
-    <Container maxWidth='lg' className={classes.container}>
-      <Typography component='h2' variant='h6' color='primary' gutterBottom>
-        추가 요청
-      </Typography>
-      <Grid container spacing={3} className={classes.tableContainer}>
-        <Grid item xs={12}>
-          <TableContainer component={Paper}>
-            <Table className={classes.table}>
-              <TableHead>
-                <TableRow>
-                  {!loading && data && data.howManyRequest && (
-                    <TableCell padding='checkbox'>
-                      <Checkbox
-                        indeterminate={
-                          selected.length > 0 &&
-                          selected.length < data.howManyRequest
-                        }
-                        checked={
-                          data.howManyRequest > 0 &&
-                          selected.length === data.howManyRequest
-                        }
-                        onChange={handleSelectAllClick}
-                        inputProps={{ 'aria-label': 'select all desserts' }}
-                      />
-                    </TableCell>
-                  )}
-                  <TableCell>이름</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>학과</TableCell>
-                  <TableCell>기수</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {loading && <Loader />}
-                {!loading &&
-                  data &&
-                  data.seeAllRequest &&
-                  data.seeAllRequest.map(row => {
-                    const isItemSelected = isSelected(row.id);
-                    const labelId = `table-checkbox-${row.id}`;
+    <>
+      <Alert
+        type={type === 'confirm' ? 'normal' : 'warning'}
+        open={alertOpen}
+        setOpen={setAlertOpen}
+        title='경고'
+        desc={
+          type === 'confirm'
+            ? '정말로 승인하시겠습니까?'
+            : '정말로 삭제하시겠습니까?'
+        }
+        onConfirm={onConfirm}
+      />
+      <Container maxWidth='lg' className={classes.container}>
+        <Typography component='h2' variant='h6' color='primary' gutterBottom>
+          추가 요청
+        </Typography>
+        <Grid container spacing={3} className={classes.tableContainer}>
+          <Grid item xs={12}>
+            <TableContainer component={Paper}>
+              <Table className={classes.table}>
+                <TableHead>
+                  <TableRow>
+                    {!loading && data && data.howManyRequest && (
+                      <TableCell padding='checkbox'>
+                        <Checkbox
+                          indeterminate={
+                            selected.length > 0 &&
+                            selected.length < data.howManyRequest
+                          }
+                          checked={
+                            data.howManyRequest > 0 &&
+                            selected.length === data.howManyRequest
+                          }
+                          onChange={handleSelectAllClick}
+                          inputProps={{ 'aria-label': 'select all desserts' }}
+                        />
+                      </TableCell>
+                    )}
+                    <TableCell>이름</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Phone</TableCell>
+                    <TableCell>학과</TableCell>
+                    <TableCell>기수</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {loading && <Loader />}
+                  {!loading &&
+                    data &&
+                    data.seeAllRequest &&
+                    data.seeAllRequest.map(row => {
+                      const isItemSelected = isSelected(row.id);
+                      const labelId = `table-checkbox-${row.id}`;
 
-                    return (
-                      <TableRow
-                        hover
-                        onClick={event => handleClick(event, row.id)}
-                        role='checkbox'
-                        aria-checked={isItemSelected}
-                        key={row.id}
-                        selected={isItemSelected}
-                      >
-                        <TableCell padding='checkbox'>
-                          <Checkbox
-                            checked={isItemSelected}
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                        </TableCell>
-                        <TableCell id={labelId} scope='row'>
-                          {row.name}
-                        </TableCell>
-                        <TableCell>{row.email}</TableCell>
-                        <TableCell>{row.cellPhone}</TableCell>
-                        <TableCell>{row.major.name}</TableCell>
-                        <TableCell>{row.graduatedYear.generation}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          {!loading && lastPage && page && (
-            <Grid container justify='center'>
-              <Pagination
-                count={lastPage}
-                page={page}
-                onChange={handlePageChange}
-              />
-            </Grid>
-          )}
+                      return (
+                        <TableRow
+                          hover
+                          onClick={event => handleClick(event, row.id)}
+                          role='checkbox'
+                          aria-checked={isItemSelected}
+                          key={row.id}
+                          selected={isItemSelected}
+                        >
+                          <TableCell padding='checkbox'>
+                            <Checkbox
+                              checked={isItemSelected}
+                              inputProps={{ 'aria-labelledby': labelId }}
+                            />
+                          </TableCell>
+                          <TableCell id={labelId} scope='row'>
+                            {row.name}
+                          </TableCell>
+                          <TableCell>{row.email}</TableCell>
+                          <TableCell>{row.cellPhone}</TableCell>
+                          <TableCell>{row.major.name}</TableCell>
+                          <TableCell>{row.graduatedYear.generation}</TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {!loading && lastPage && page && (
+              <Grid container justify='center'>
+                <Pagination
+                  count={lastPage}
+                  page={page}
+                  onChange={handlePageChange}
+                />
+              </Grid>
+            )}
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container justify='flex-end' className={classes.button}>
-        <Button
-          variant='contained'
-          color='primary'
-          disabled={selected.length === 0 || confirmLoading}
-          onClick={handleButtonClick}
-        >
-          {`선택된 ${selected.length}건의 요청 승인`}
-        </Button>
-      </Grid>
-    </Container>
+        <Grid container justify='flex-end' className={classes.buttonContainer}>
+          <Button
+            variant='contained'
+            color='secondary'
+            className={classes.button}
+            disabled={selected.length === 0 || confirmLoading || rejectLoading}
+            onClick={handleRejectButtonClick}
+          >
+            {`선택된 ${selected.length}건의 요청 삭제`}
+          </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            className={classes.button}
+            disabled={selected.length === 0 || confirmLoading || rejectLoading}
+            onClick={handleConfirmButtonClick}
+          >
+            {`선택된 ${selected.length}건의 요청 승인`}
+          </Button>
+        </Grid>
+      </Container>
+    </>
   );
 };

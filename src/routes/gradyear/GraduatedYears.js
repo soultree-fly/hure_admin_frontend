@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import Backdrop from '@material-ui/core/Backdrop';
+import { toast } from 'react-toastify';
+
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
-import Fade from '@material-ui/core/Fade';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Table from '@material-ui/core/Table';
@@ -25,7 +20,7 @@ import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useStyles } from 'Styles/TableStyles';
-import { toast } from 'react-toastify';
+import Alert from 'components/Alert';
 
 const SEE_ALL_GRAD_YEAR = gql`
   {
@@ -81,17 +76,11 @@ export default () => {
     setSelected({ id: id });
   };
 
-  const handleClose = () => {
-    setOpen(false);
-    setSelected({});
-  };
-
   const handleClick = async (event, id) => {
     handleOpen(id);
   };
 
-  const handleConfirm = async () => {
-    setOpen(false);
+  const onConfirm = async () => {
     await deleteGradYear({ variables: { id: selected.id } });
     if (error) toast.error('Delete 실패. 나중에 다시 시도해주십시오.');
     else {
@@ -104,47 +93,14 @@ export default () => {
 
   return (
     <>
-      <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
-        className={classes.modal}
+      <Alert
+        type='warning'
         open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500
-        }}
-      >
-        <Fade in={open}>
-          <Card className={classes.paper}>
-            <CardActionArea>
-              <CardContent>
-                <Typography gutterBottom variant='h5' component='h2'>
-                  경고
-                </Typography>
-                <Typography variant='body2' color='textSecondary' component='p'>
-                  정말로 삭제하시겠습니까?
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions className={classes.floatRight}>
-              <Button onClick={handleClose} size='small' color='primary'>
-                취소
-              </Button>
-              <Button onClick={handleConfirm} size='small' color='primary'>
-                확인
-              </Button>
-            </CardActions>
-          </Card>
-          {/* <div className={classes.paper}>
-            <h2 id='transition-modal-title'>정말로 삭제하시겠습니까?</h2>
-            <p id='transition-modal-description'>
-              react-transition-group animates me.
-            </p>
-          </div> */}
-        </Fade>
-      </Modal>
+        setOpen={setOpen}
+        title='경고'
+        desc='정말로 삭제하시겠습니까?'
+        onConfirm={onConfirm}
+      />
       <Container maxWidth='lg' className={classes.container}>
         <Typography component='h2' variant='h6' color='primary' gutterBottom>
           기수
@@ -188,7 +144,7 @@ export default () => {
             </Table>
           </TableContainer>
         </Grid>
-        <Grid container justify='flex-end' className={classes.button}>
+        <Grid container justify='flex-end' className={classes.buttonContainer}>
           <Link to='/gradyears/new'>
             <Button variant='contained' color='primary'>
               기수 추가

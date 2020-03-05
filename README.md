@@ -25,8 +25,8 @@ yarn start
 
 - [x] Request list
 - [ ] Request detail
-- [x] Request confirm
-- [ ] Request reject
+- [x] Confirm requests
+- [x] Reject requests
 
 ---
 

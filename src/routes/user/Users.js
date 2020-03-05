@@ -132,7 +132,7 @@ export default () => {
           )}
         </Grid>
       </Grid>
-      <Grid container justify='flex-end' className={classes.button}>
+      <Grid container justify='flex-end' className={classes.buttonContainer}>
         <Link to='/users/new'>
           <Button variant='contained' color='primary'>
             유저 추가

@@ -130,7 +130,7 @@ export default () => {
                             aria-label='delete'
                             className={classes.deleteButton}
                           >
-                            <DeleteIcon fontSize='smaill' />
+                            <DeleteIcon fontSize='small' />
                           </IconButton>
                         </TableCell>
                       </TableRow>

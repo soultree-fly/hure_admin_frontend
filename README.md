@@ -20,7 +20,7 @@ yarn start
 - [x] User list
 - [ ] User detail
 - [ ] Edit user profile
-- [ ] Delete user profile
+- [x] Delete user profile
 
 ---
 

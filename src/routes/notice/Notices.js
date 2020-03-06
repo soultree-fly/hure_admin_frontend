@@ -91,7 +91,6 @@ export default () => {
   const handleOpen = id => {
     setOpen(true);
     setSelected({ id });
-    console.log(selected);
   };
 
   const handleDeleteClick = (event, id) => {
@@ -163,7 +162,7 @@ export default () => {
                           </Link>
                           <IconButton
                             onClick={event => handleDeleteClick(event, row.id)}
-                            aria-label='edit'
+                            aria-label='delete'
                             className={classes.deleteButton}
                           >
                             <DeleteIcon fontSize='small' />

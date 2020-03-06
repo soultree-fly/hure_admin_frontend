@@ -19,7 +19,8 @@ yarn start
 - [x] Create user profile
 - [x] User list
 - [ ] User detail
-- [ ] Edit / Delete user profile
+- [ ] Edit user profile
+- [ ] Delete user profile
 
 ---
 
@@ -33,7 +34,8 @@ yarn start
 - [x] Create professor profile
 - [x] Professor list
 - [ ] Professor detail
-- [ ] Edit / Delete professor profile
+- [ ] Edit professor profile
+- [x] Delete professor profile
 
 ---
 

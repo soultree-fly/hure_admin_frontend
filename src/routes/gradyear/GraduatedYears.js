@@ -113,7 +113,7 @@ export default () => {
                   <TableCell>기수</TableCell>
                   <TableCell>연도</TableCell>
                   <TableCell>학기</TableCell>
-                  <TableCell align='right'>삭제</TableCell>
+                  <TableCell align='right'>액션</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

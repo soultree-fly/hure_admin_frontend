@@ -47,4 +47,4 @@ yarn start
 - [x] Notice list
 - [ ] Notice detail
 - [x] Edit notice
-- [ ] Delete notice
+- [x] Delete notice

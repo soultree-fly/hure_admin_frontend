@@ -16,10 +16,12 @@ export const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(1)
   },
   editButton: {
-    padding: 0
+    padding: 0,
+    marginLeft: theme.spacing(1)
   },
   deleteButton: {
-    padding: 0
+    padding: 0,
+    marginLeft: theme.spacing(1)
   },
   button: {
     marginLeft: theme.spacing(2)

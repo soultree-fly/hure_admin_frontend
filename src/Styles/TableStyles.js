@@ -15,6 +15,12 @@ export const useStyles = makeStyles(theme => ({
   buttonContainer: {
     paddingTop: theme.spacing(1)
   },
+  editButton: {
+    padding: 0
+  },
+  deleteButton: {
+    padding: 0
+  },
   button: {
     marginLeft: theme.spacing(2)
   }

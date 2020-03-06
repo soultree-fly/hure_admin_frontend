@@ -5,6 +5,7 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 import Pagination from '@material-ui/lab/Pagination';
 import Paper from '@material-ui/core/Paper';
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -15,6 +16,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import EditIcon from '@material-ui/icons/Edit';
 import moment from 'moment';
 
 import { useStyles } from 'Styles/TableStyles';
@@ -43,6 +45,9 @@ const Loader = () => (
       <TableCell>
         <Skeleton animation='wave' />
       </TableCell>
+      <TableCell>
+        <Skeleton animation='wave' />
+      </TableCell>
     </TableRow>
   </>
 );
@@ -60,10 +65,12 @@ export default () => {
       setLastPage(Math.ceil(data.howManyNotice / limit));
     }
   }, [getNotices, data]);
-  const classes = useStyles();
+
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
+  const classes = useStyles();
 
   return (
     <Container maxWidth='lg' className={classes.container}>
@@ -79,6 +86,7 @@ export default () => {
                   <TableCell>제목</TableCell>
                   <TableCell>내용</TableCell>
                   <TableCell>작성일자</TableCell>
+                  <TableCell align='right'>액션</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -87,11 +95,21 @@ export default () => {
                   data &&
                   data.seeAllNotice &&
                   data.seeAllNotice.map(row => (
-                    <TableRow key={row.id}>
+                    <TableRow hover key={row.id}>
                       <TableCell>{row.title}</TableCell>
                       <TableCell>{row.desc}</TableCell>
                       <TableCell>
                         {moment(row.createdAt).format('YYYY. M. D.')}
+                      </TableCell>
+                      <TableCell align='right'>
+                        <Link to={`/notices/${row.id}/edit`}>
+                          <IconButton
+                            aria-label='edit'
+                            className={classes.editButton}
+                          >
+                            <EditIcon fontSize='small' />
+                          </IconButton>
+                        </Link>
                       </TableCell>
                     </TableRow>
                   ))}

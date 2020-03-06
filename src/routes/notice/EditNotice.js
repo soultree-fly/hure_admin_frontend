@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -9,29 +9,51 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
-import useInput from 'hooks/useInput';
+import { useInputWithSet } from 'hooks/useInput';
 import { useStyles } from 'Styles/NewStyles';
 
-const CREATE_NOTICE = gql`
-  mutation createNotice($title: String!, $desc: String!) {
-    createNotice(title: $title, desc: $desc) {
+const SEE_NOTICE = gql`
+  query seeNotice($id: ID!) {
+    seeNotice(id: $id) {
+      title
+      desc
+    }
+  }
+`;
+
+const EDIT_NOTICE = gql`
+  mutation editNotice($id: ID!, $title: String!, $desc: String!) {
+    editNotice(id: $id, title: $title, desc: $desc) {
       title
     }
   }
 `;
 
-export default () => {
-  const [addNotice, { data, loading }] = useMutation(CREATE_NOTICE);
+export default ({ match }) => {
+  const {
+    params: { id }
+  } = match;
+  const { data: queryData, loading: queryLoading } = useQuery(SEE_NOTICE, {
+    variables: { id }
+  });
 
-  const title = useInput('');
-  const desc = useInput('');
+  const [
+    editNotice,
+    { data: mutationData, loading: mutationLoading }
+  ] = useMutation(EDIT_NOTICE);
 
-  if (data && data.createNotice && data.createNotice.title) {
-    toast.success('등록이 완료되었습니다.');
-  }
+  const { property: titleProps, setValue: setTitle } = useInputWithSet('');
+  const { property: descProps, setValue: setDesc } = useInputWithSet('');
 
-  const LoadingCheckButton = ({ loading }) =>
-    loading ? (
+  useEffect(() => {
+    if (queryData && queryData.seeNotice && queryData.seeNotice.title) {
+      setTitle(queryData.seeNotice.title);
+      setDesc(queryData.seeNotice.desc);
+    }
+  }, [queryData, setTitle, setDesc]);
+
+  const LoadingCheckButton = () =>
+    queryLoading || mutationLoading ? (
       <Button type='submit' fullWidth variant='contained' disabled>
         Loading
       </Button>
@@ -44,10 +66,11 @@ export default () => {
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      await addNotice({
+      await editNotice({
         variables: {
-          title: title.value,
-          desc: desc.value
+          id,
+          title: titleProps.value,
+          desc: descProps.value
         }
       });
     } catch {
@@ -59,13 +82,14 @@ export default () => {
 
   return (
     <>
-      {!loading && data && data.createNotice && data.createNotice.title && (
-        <Redirect to='/notices' />
-      )}
+      {!mutationLoading &&
+        mutationData &&
+        mutationData.editNotice &&
+        mutationData.editNotice.title && <Redirect push to='/notices' />}
       <Container className={classes.root}>
         <Grid className={classes.title} item xs={12}>
           <Typography component='h2' variant='h6' color='primary' gutterBottom>
-            공지 추가
+            공지 수정
           </Typography>
         </Grid>
         <form onSubmit={onSubmit}>
@@ -80,8 +104,7 @@ export default () => {
                 label='제목'
                 name='title'
                 autoComplete='title'
-                autoFocus
-                {...title}
+                {...titleProps}
               />
             </Grid>
             <Grid item xs={12}>
@@ -94,12 +117,12 @@ export default () => {
                 label='내용'
                 name='desc'
                 multiline
-                {...desc}
+                {...descProps}
               />
             </Grid>
             <Grid item xs='auto' sm={4} />
             <Grid item xs={12} sm={4}>
-              <LoadingCheckButton loading={loading} />
+              <LoadingCheckButton />
             </Grid>
             <Grid item xs='auto' sm={4} />
           </Grid>

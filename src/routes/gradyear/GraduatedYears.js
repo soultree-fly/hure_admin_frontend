@@ -113,9 +113,7 @@ export default () => {
                   <TableCell>기수</TableCell>
                   <TableCell>연도</TableCell>
                   <TableCell>학기</TableCell>
-                  <TableCell padding='default' align='right'>
-                    삭제
-                  </TableCell>
+                  <TableCell align='right'>삭제</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -129,13 +127,13 @@ export default () => {
                       <TableCell>{row.generation}기</TableCell>
                       <TableCell>{row.year}년</TableCell>
                       <TableCell>{row.semester}학기</TableCell>
-                      <TableCell padding='default' align='right'>
+                      <TableCell align='right'>
                         <IconButton
                           onClick={event => handleClick(event, row.id)}
                           aria-label='delete'
-                          style={{ padding: 0 }}
+                          className={classes.deleteButton}
                         >
-                          <DeleteIcon fontSize='inherit' />
+                          <DeleteIcon fontSize='small' />
                         </IconButton>
                       </TableCell>
                     </TableRow>

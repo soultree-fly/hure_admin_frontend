@@ -11,6 +11,7 @@ import Professors from 'routes/prof/Professors';
 import NewGradYear from 'routes/gradyear/NewGradYear';
 import GraduatedYears from 'routes/gradyear/GraduatedYears';
 import NewNotice from 'routes/notice/NewNotice';
+import EditNotice from 'routes/notice/EditNotice';
 import Notices from 'routes/notice/Notices';
 import Header from './Header';
 
@@ -18,15 +19,16 @@ const SignedInRoutes = () => (
   <>
     <Header>
       <Switch>
-        <Route path='/users/new' component={NewUser} />
-        <Route path='/users' component={Users} />
-        <Route path='/requests' component={Requests} />
-        <Route path='/profs/new' component={NewProfessor} />
-        <Route path='/profs' component={Professors} />
-        <Route path='/gradyears/new' component={NewGradYear} />
-        <Route path='/gradyears' component={GraduatedYears} />
-        <Route path='/notices/new' component={NewNotice} />
-        <Route path='/notices' component={Notices} />
+        <Route exact path='/users/new' component={NewUser} />
+        <Route exact path='/users' component={Users} />
+        <Route exact path='/requests' component={Requests} />
+        <Route exact path='/profs/new' component={NewProfessor} />
+        <Route exact path='/profs' component={Professors} />
+        <Route exact path='/gradyears/new' component={NewGradYear} />
+        <Route exact path='/gradyears' component={GraduatedYears} />
+        <Route exact path='/notices/new' component={NewNotice} />
+        <Route exact path='/notices/:id/edit' component={EditNotice} />
+        <Route exact path='/notices' component={Notices} />
         <Redirect from='*' to='/users' />
       </Switch>
     </Header>

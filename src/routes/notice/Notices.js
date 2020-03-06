@@ -147,7 +147,11 @@ export default () => {
                     data.seeAllNotice.map(row => (
                       <TableRow hover key={row.id}>
                         <TableCell>{row.title}</TableCell>
-                        <TableCell>{row.desc}</TableCell>
+                        <TableCell>
+                          {row.desc.length > 30
+                            ? row.desc.slice(0, 30) + '...'
+                            : row.desc}
+                        </TableCell>
                         <TableCell>
                           {moment(row.createdAt).format('YYYY. M. D.')}
                         </TableCell>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
@@ -102,8 +102,14 @@ export default () => {
     DELETE_USER
   );
 
+  const [redirect, setRedirect] = useState(false);
   const [selected, setSelected] = useState({});
   const [open, setOpen] = useState(false);
+
+  const handleRowClick = (event, id) => {
+    setSelected({ id });
+    setRedirect(true);
+  };
 
   const handleOpen = id => {
     setOpen(true);
@@ -131,6 +137,7 @@ export default () => {
 
   return (
     <>
+      {redirect && selected && <Redirect to={`/users/${selected.id}`} />}
       <Alert
         type='warning'
         open={open}
@@ -164,12 +171,32 @@ export default () => {
                     data &&
                     data.seeAllUser &&
                     data.seeAllUser.map(row => (
-                      <TableRow key={row.id}>
-                        <TableCell>{row.name}</TableCell>
-                        <TableCell>{row.email}</TableCell>
-                        <TableCell>{row.cellPhone}</TableCell>
-                        <TableCell>{row.major.name}</TableCell>
-                        <TableCell>{row.graduatedYear.generation}</TableCell>
+                      <TableRow hover key={row.id}>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.name}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.email}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.cellPhone}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.major.name}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.graduatedYear.generation}
+                        </TableCell>
                         <TableCell align='right'>
                           <IconButton
                             onClick={event => handleDeleteClick(event, row.id)}

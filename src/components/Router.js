@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Auth from 'routes/Auth';
 import NewUser from 'routes/user/NewUser';
+import User from 'routes/user/User';
 import Users from 'routes/user/Users';
 import Requests from 'routes/request/Requests';
 import NewProfessor from 'routes/prof/NewProfessor';
@@ -20,6 +21,7 @@ const SignedInRoutes = () => (
     <Header>
       <Switch>
         <Route exact path='/users/new' component={NewUser} />
+        <Route exact path='/users/:id' component={User} />
         <Route exact path='/users' component={Users} />
         <Route exact path='/requests' component={Requests} />
         <Route exact path='/profs/new' component={NewProfessor} />

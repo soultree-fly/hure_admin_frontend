@@ -18,7 +18,7 @@ yarn start
 
 - [x] Create user profile
 - [x] User list
-- [ ] User detail
+- [x] User detail
 - [ ] Edit user profile
 - [x] Delete user profile
 

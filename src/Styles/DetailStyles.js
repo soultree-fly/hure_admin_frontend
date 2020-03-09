@@ -32,5 +32,8 @@ export const useStyles = makeStyles(theme => ({
   deleteButton: {
     padding: 0,
     marginLeft: theme.spacing(1)
+  },
+  button: {
+    marginLeft: theme.spacing(2)
   }
 }));

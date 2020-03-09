@@ -39,6 +39,9 @@ export default () => {
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState();
   const limit = 10;
+
+  const [redirect, setRedirect] = useState(false);
+  const [redirectSelected, setRedirectSelected] = useState({});
   const [selected, setSelected] = useState([]);
   const [type, setType] = useState('');
   const [alertOpen, setAlertOpen] = useState(false);
@@ -74,7 +77,7 @@ export default () => {
     setSelected([]);
   };
 
-  const handleClick = (event, id) => {
+  const handleCheckboxClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
@@ -92,6 +95,11 @@ export default () => {
     }
 
     setSelected(newSelected);
+  };
+
+  const handleRowClick = (event, id) => {
+    setRedirectSelected({ id });
+    setRedirect(true);
   };
 
   const handlePageChange = (event, value) => {
@@ -135,11 +143,14 @@ export default () => {
       selected={selected}
       confirmLoading={confirmLoading}
       rejectLoading={rejectLoading}
+      redirect={redirect}
+      redirectSelected={redirectSelected}
       alertOpen={alertOpen}
       setAlertOpen={setAlertOpen}
       type={type}
       handleSelectAllClick={handleSelectAllClick}
-      handleClick={handleClick}
+      handleCheckboxClick={handleCheckboxClick}
+      handleRowClick={handleRowClick}
       handlePageChange={handlePageChange}
       handleConfirmButtonClick={handleConfirmButtonClick}
       handleRejectButtonClick={handleRejectButtonClick}

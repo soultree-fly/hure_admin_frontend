@@ -19,13 +19,12 @@ yarn start
 - [x] Create user profile
 - [x] User list
 - [x] User detail
-- [ ] Edit user profile
 - [x] Delete user profile
 
 ---
 
 - [x] Request list
-- [ ] Request detail
+- [x] Request detail
 - [x] Confirm requests
 - [x] Reject requests
 

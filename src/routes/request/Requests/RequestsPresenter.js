@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Container from '@material-ui/core/Container';
@@ -48,11 +49,14 @@ export default args => {
     selected,
     confirmLoading,
     rejectLoading,
+    redirect,
+    redirectSelected,
     alertOpen,
     setAlertOpen,
     type,
     handleSelectAllClick,
-    handleClick,
+    handleCheckboxClick,
+    handleRowClick,
     handlePageChange,
     handleConfirmButtonClick,
     handleRejectButtonClick,
@@ -64,6 +68,9 @@ export default args => {
 
   return (
     <>
+      {redirect && redirectSelected && (
+        <Redirect to={`/requests/${redirectSelected.id}`} />
+      )}
       <Alert
         type={type === 'confirm' ? 'normal' : 'warning'}
         open={alertOpen}
@@ -116,30 +123,48 @@ export default args => {
                     data.seeAllRequest &&
                     data.seeAllRequest.map(row => {
                       const isItemSelected = isSelected(row.id);
-                      const labelId = `table-checkbox-${row.id}`;
 
                       return (
                         <TableRow
                           hover
-                          onClick={event => handleClick(event, row.id)}
                           role='checkbox'
                           aria-checked={isItemSelected}
                           key={row.id}
                           selected={isItemSelected}
                         >
-                          <TableCell padding='checkbox'>
-                            <Checkbox
-                              checked={isItemSelected}
-                              inputProps={{ 'aria-labelledby': labelId }}
-                            />
+                          <TableCell
+                            onClick={event =>
+                              handleCheckboxClick(event, row.id)
+                            }
+                            padding='checkbox'
+                          >
+                            <Checkbox checked={isItemSelected} />
                           </TableCell>
-                          <TableCell id={labelId} scope='row'>
+                          <TableCell
+                            onClick={event => handleRowClick(event, row.id)}
+                          >
                             {row.name}
                           </TableCell>
-                          <TableCell>{row.email}</TableCell>
-                          <TableCell>{row.cellPhone}</TableCell>
-                          <TableCell>{row.major.name}</TableCell>
-                          <TableCell>{row.graduatedYear.generation}</TableCell>
+                          <TableCell
+                            onClick={event => handleRowClick(event, row.id)}
+                          >
+                            {row.email}
+                          </TableCell>
+                          <TableCell
+                            onClick={event => handleRowClick(event, row.id)}
+                          >
+                            {row.cellPhone}
+                          </TableCell>
+                          <TableCell
+                            onClick={event => handleRowClick(event, row.id)}
+                          >
+                            {row.major.name}
+                          </TableCell>
+                          <TableCell
+                            onClick={event => handleRowClick(event, row.id)}
+                          >
+                            {row.graduatedYear.generation}
+                          </TableCell>
                         </TableRow>
                       );
                     })}

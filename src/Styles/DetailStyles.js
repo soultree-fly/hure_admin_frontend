@@ -23,15 +23,15 @@ export const useStyles = makeStyles(theme => ({
     fontWeight: 600
   },
   buttonContainer: {
-    paddingTop: theme.spacing(1)
+    paddingTop: theme.spacing(2)
   },
   editButton: {
     padding: 0,
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(2)
   },
   deleteButton: {
     padding: 0,
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(2)
   },
   button: {
     marginLeft: theme.spacing(2)

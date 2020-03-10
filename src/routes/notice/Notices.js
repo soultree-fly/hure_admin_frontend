@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
@@ -85,12 +85,18 @@ export default () => {
     DELETE_NOTICE
   );
 
+  const [redirect, setRedirect] = useState(false);
   const [selected, setSelected] = useState({});
   const [open, setOpen] = useState(false);
 
   const handleOpen = id => {
     setOpen(true);
     setSelected({ id });
+  };
+
+  const handleRowClick = (event, id) => {
+    setSelected({ id });
+    setRedirect(true);
   };
 
   const handleDeleteClick = (event, id) => {
@@ -114,6 +120,7 @@ export default () => {
 
   return (
     <>
+      {redirect && selected && <Redirect to={`/notices/${selected.id}`} />}
       <Alert
         type='warning'
         open={open}
@@ -146,13 +153,21 @@ export default () => {
                     data.seeAllNotice &&
                     data.seeAllNotice.map(row => (
                       <TableRow hover key={row.id}>
-                        <TableCell>{row.title}</TableCell>
-                        <TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.title}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
                           {row.desc.length > 30
                             ? row.desc.slice(0, 30) + '...'
                             : row.desc}
                         </TableCell>
-                        <TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
                           {moment(row.createdAt).format('YYYY. M. D.')}
                         </TableCell>
                         <TableCell align='right'>

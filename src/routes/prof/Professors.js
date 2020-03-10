@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
@@ -64,8 +64,14 @@ export default () => {
     DELETE_PROF
   );
 
+  const [redirect, setRedirect] = useState(false);
   const [selected, setSelected] = useState({});
   const [open, setOpen] = useState(false);
+
+  const handleRowClick = (event, id) => {
+    setSelected({ id });
+    setRedirect(true);
+  };
 
   const handleOpen = id => {
     setOpen(true);
@@ -89,6 +95,7 @@ export default () => {
 
   return (
     <>
+      {redirect && selected && <Redirect to={`/profs/${selected.id}`} />}
       <Alert
         type='warning'
         open={open}
@@ -120,10 +127,22 @@ export default () => {
                     data &&
                     data.seeAllProf &&
                     data.seeAllProf.map(row => (
-                      <TableRow key={row.id}>
-                        <TableCell>{row.name}</TableCell>
-                        <TableCell>{row.position}</TableCell>
-                        <TableCell>{row.title}</TableCell>
+                      <TableRow hover key={row.id}>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.name}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.position}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
+                          {row.title}
+                        </TableCell>
                         <TableCell align='right'>
                           <IconButton
                             onClick={event => handleDeleteClick(event, row.id)}

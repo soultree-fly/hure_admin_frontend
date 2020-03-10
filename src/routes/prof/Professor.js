@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
@@ -14,38 +14,28 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Skeleton from '@material-ui/lab/Skeleton';
-import moment from 'moment';
 
 import { useStyles } from 'Styles/DetailStyles';
 import Alert from 'components/Alert';
 
-const SEE_USER = gql`
-  query seeUser($id: ID!) {
-    seeUser(id: $id) {
+const SEE_PROF = gql`
+  query seeProf($id: ID!) {
+    seeProf(id: $id) {
       name
-      birthday
       email
-      cellPhone
-      company
-      companyDesc
-      team
-      position
       workPhone
-      workAddress
+      position
+      title
+      company
+      order
       photo
-      major {
-        name
-      }
-      graduatedYear {
-        generation
-      }
     }
   }
 `;
 
-const DELETE_USER = gql`
-  mutation deleteUser($id: ID!) {
-    deleteUser(id: $id) {
+const DELETE_PROF = gql`
+  mutation deleteProf($id: ID!) {
+    deleteProf(id: $id) {
       id
     }
   }
@@ -55,10 +45,10 @@ export default ({ match }) => {
   const {
     params: { id }
   } = match;
-  const { data, loading } = useQuery(SEE_USER, { variables: { id } });
+  const { data, loading } = useQuery(SEE_PROF, { variables: { id } });
 
-  const [deleteUser, { loading: mutationLoading, error }] = useMutation(
-    DELETE_USER
+  const [deleteProf, { loading: mutationLoading, error }] = useMutation(
+    DELETE_PROF
   );
 
   const [redirect, setRedirect] = useState(false);
@@ -73,7 +63,7 @@ export default ({ match }) => {
   };
 
   const onConfirm = async () => {
-    await deleteUser({ variables: { id } });
+    await deleteProf({ variables: { id } });
     if (error) toast.error('Delete 실패. 나중에 다시 시도해주십시오.');
     else setRedirect(true);
   };
@@ -82,7 +72,7 @@ export default ({ match }) => {
 
   return (
     <>
-      {redirect && <Redirect to='/users' />}
+      {redirect && <Redirect to='/profs' />}
       <Alert
         type='warning'
         open={open}
@@ -93,7 +83,7 @@ export default ({ match }) => {
       />
       <Container maxWidth='lg' className={classes.container}>
         <Typography component='h2' variant='h6' color='primary' gutterBottom>
-          유저 상세
+          교수 상세
         </Typography>
         <Table>
           <TableBody>
@@ -104,51 +94,33 @@ export default ({ match }) => {
                 </TableCell>
               </TableRow>
             )}
-            {!loading && !mutationLoading && data && data.seeUser[0] && (
+            {!loading && !mutationLoading && data && data.seeProf && (
               <>
                 <TableRow>
                   <TableCell rowSpan={12} className={classes.avatarContainer}>
                     <Avatar
                       variant='rounded'
                       alt='Profile Photo'
-                      src={data.seeUser[0].photo}
+                      src={data.seeProf.photo}
                       className={classes.avatar}
                     />
                   </TableCell>
                   <TableCell colSpan={2} align='center'>
-                    <Typography variant='h4' className={classes.name}>
-                      {data.seeUser[0].name}
+                    <Typography
+                      variant='h4'
+                      className={classes.name}
+                      style={{ display: 'inline' }}
+                    >
+                      {data.seeProf.name + ' '}
+                    </Typography>
+                    <Typography variant='h6' style={{ display: 'inline' }}>
+                      {data.seeProf.position}
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2} align='center'>
-                    <Typography variant='h6'>
-                      {data.seeUser[0].major.name}{' '}
-                      {data.seeUser[0].graduatedYear.generation}기
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell align='right'>
-                    <Typography color='primary' className={classes.subtitle}>
-                      생일
-                    </Typography>
-                  </TableCell>
-                  <TableCell align='left'>
-                    <Typography>
-                      {moment(data.seeUser[0].birthday).format('YYYY. M. D.')}
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell align='right'>
-                    <Typography color='primary' className={classes.subtitle}>
-                      휴대전화
-                    </Typography>
-                  </TableCell>
-                  <TableCell align='left'>
-                    <Typography>{data.seeUser[0].cellPhone}</Typography>
+                    <Typography variant='h6'>{data.seeProf.title}</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -158,72 +130,37 @@ export default ({ match }) => {
                     </Typography>
                   </TableCell>
                   <TableCell align='left'>
-                    <Typography>{data.seeUser[0].email}</Typography>
+                    <Typography>{data.seeProf.email}</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align='right'>
                     <Typography color='primary' className={classes.subtitle}>
-                      회사명
+                      사무실/회사 전화
                     </Typography>
                   </TableCell>
                   <TableCell align='left'>
-                    <Typography>{data.seeUser[0].company}</Typography>
+                    <Typography>{data.seeProf.workPhone}</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align='right'>
                     <Typography color='primary' className={classes.subtitle}>
-                      부서
+                      회사
                     </Typography>
                   </TableCell>
                   <TableCell align='left'>
-                    <Typography>{data.seeUser[0].team}</Typography>
+                    <Typography>{data.seeProf.company}</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell align='right'>
                     <Typography color='primary' className={classes.subtitle}>
-                      직책
+                      표시 순서
                     </Typography>
                   </TableCell>
                   <TableCell align='left'>
-                    <Typography>{data.seeUser[0].position}</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell
-                    align='right'
-                    style={{ verticalAlign: 'baseline' }}
-                  >
-                    <Typography color='primary' className={classes.subtitle}>
-                      업무설명
-                    </Typography>
-                  </TableCell>
-                  <TableCell align='left'>
-                    {data.seeUser[0].companyDesc.map(row => (
-                      <Typography key={row}>{row}</Typography>
-                    ))}
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell align='right'>
-                    <Typography color='primary' className={classes.subtitle}>
-                      회사전화
-                    </Typography>
-                  </TableCell>
-                  <TableCell align='left'>
-                    <Typography>{data.seeUser[0].workPhone}</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell align='right'>
-                    <Typography color='primary' className={classes.subtitle}>
-                      회사주소
-                    </Typography>
-                  </TableCell>
-                  <TableCell align='left'>
-                    <Typography>{data.seeUser[0].workAddress}</Typography>
+                    <Typography>{data.seeProf.order}</Typography>
                   </TableCell>
                 </TableRow>
               </>
@@ -231,6 +168,15 @@ export default ({ match }) => {
           </TableBody>
         </Table>
         <Grid container justify='flex-end' className={classes.buttonContainer}>
+          {/* <Link to={`/profs/${id}/edit`}>
+            <Button
+              variant='contained'
+              color='default'
+              className={classes.button}
+            >
+              수정
+            </Button>
+          </Link> */}
           <Button
             variant='contained'
             color='secondary'

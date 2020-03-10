@@ -149,14 +149,14 @@ export default ({ match }) => {
                         className={classes.avatar}
                       />
                     </TableCell>
-                    <TableCell colspan={2} align='center'>
+                    <TableCell colSpan={2} align='center'>
                       <Typography variant='h4' className={classes.name}>
                         {data.seeRequest[0].name}
                       </Typography>
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell colspan={2} align='center'>
+                    <TableCell colSpan={2} align='center'>
                       <Typography variant='h6'>
                         {data.seeRequest[0].major.name}{' '}
                         {data.seeRequest[0].graduatedYear.generation}기

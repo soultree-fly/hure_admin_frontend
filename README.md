@@ -32,7 +32,7 @@ yarn start
 
 - [x] Create professor profile
 - [x] Professor list
-- [ ] Professor detail
+- [x] Professor detail
 - [ ] Edit professor profile
 - [x] Delete professor profile
 

@@ -168,20 +168,21 @@ export default ({ match }) => {
           </TableBody>
         </Table>
         <Grid container justify='flex-end' className={classes.buttonContainer}>
-          {/* <Link to={`/profs/${id}/edit`}>
+          <Link to={`/profs/${id}/edit`}>
             <Button
               variant='contained'
               color='default'
               className={classes.button}
+              disabled={loading || mutationLoading}
             >
               수정
             </Button>
-          </Link> */}
+          </Link>
           <Button
             variant='contained'
             color='secondary'
             className={classes.button}
-            disabled={loading}
+            disabled={loading || mutationLoading}
             onClick={handleDeleteButtonClick}
           >
             삭제

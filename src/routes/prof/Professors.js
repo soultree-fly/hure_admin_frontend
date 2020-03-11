@@ -17,6 +17,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useStyles } from 'Styles/TableStyles';
@@ -144,6 +145,14 @@ export default () => {
                           {row.title}
                         </TableCell>
                         <TableCell align='right'>
+                          <Link to={`/profs/${row.id}/edit`}>
+                            <IconButton
+                              aria-label='edit'
+                              className={classes.editButton}
+                            >
+                              <EditIcon fontSize='small' />
+                            </IconButton>
+                          </Link>
                           <IconButton
                             onClick={event => handleDeleteClick(event, row.id)}
                             aria-label='delete'

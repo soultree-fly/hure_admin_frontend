@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   last: {
     paddingBottom: theme.spacing(4)
+  },
+  privacy: {
+    color: '#222'
   }
 }));
 
@@ -18,7 +21,13 @@ export default () => {
       color='textSecondary'
       align='center'
     >
-      {'© '}
+      <a
+        href='https://www.notion.so/8e2d02bb5661401b9885ec894df867fe'
+        className={classes.privacy}
+      >
+        개인정보처리방침
+      </a>
+      {' | © '}
       {new Date().getFullYear()}
       {' Tarrazu'}
     </Typography>

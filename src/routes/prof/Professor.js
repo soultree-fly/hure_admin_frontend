@@ -22,13 +22,16 @@ const SEE_PROF = gql`
   query seeProf($id: ID!) {
     seeProf(id: $id) {
       name
+      title
+      position
       email
       workPhone
-      position
-      title
       company
       order
       photo
+      major {
+        name
+      }
     }
   }
 `;
@@ -114,13 +117,15 @@ export default ({ match }) => {
                       {data.seeProf.name + ' '}
                     </Typography>
                     <Typography variant='h6' style={{ display: 'inline' }}>
-                      {data.seeProf.position}
+                      {data.seeProf.title}
                     </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2} align='center'>
-                    <Typography variant='h6'>{data.seeProf.title}</Typography>
+                    <Typography variant='h6'>
+                      {data.seeProf.major.name} / {data.seeProf.position}
+                    </Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>

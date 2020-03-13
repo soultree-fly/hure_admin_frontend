@@ -28,8 +28,11 @@ const SEE_ALL_PROF = gql`
     seeAllProf {
       id
       name
-      position
       title
+      position
+      major {
+        name
+      }
     }
   }
 `;
@@ -44,6 +47,9 @@ const DELETE_PROF = gql`
 
 const Loader = () => (
   <TableRow>
+    <TableCell>
+      <Skeleton animation='wave' />
+    </TableCell>
     <TableCell>
       <Skeleton animation='wave' />
     </TableCell>
@@ -117,7 +123,8 @@ export default () => {
                   <TableRow>
                     <TableCell>이름</TableCell>
                     <TableCell>구분</TableCell>
-                    <TableCell>직책</TableCell>
+                    <TableCell>직위</TableCell>
+                    <TableCell>전공</TableCell>
                     <TableCell align='right'>액션</TableCell>
                   </TableRow>
                 </TableHead>
@@ -137,12 +144,17 @@ export default () => {
                         <TableCell
                           onClick={event => handleRowClick(event, row.id)}
                         >
+                          {row.title}
+                        </TableCell>
+                        <TableCell
+                          onClick={event => handleRowClick(event, row.id)}
+                        >
                           {row.position}
                         </TableCell>
                         <TableCell
                           onClick={event => handleRowClick(event, row.id)}
                         >
-                          {row.title}
+                          {row.major.name}
                         </TableCell>
                         <TableCell align='right'>
                           <Link to={`/profs/${row.id}/edit`}>

@@ -1,7 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 
@@ -11,13 +15,18 @@ import Dropzone from 'components/Dropzone';
 export default args => {
   const {
     name,
+    title,
+    position,
+    majorName,
+    inputLabel,
+    labelWidth,
     email,
     workPhone,
-    position,
-    title,
     company,
     order,
     setFile,
+    queryData,
+    queryLoading,
     onSubmit,
     loading,
     axiosLoading
@@ -46,7 +55,7 @@ export default args => {
         </Grid>
         <form onSubmit={onSubmit}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant='outlined'
                 margin='none'
@@ -59,6 +68,60 @@ export default args => {
                 autoFocus
                 {...name}
               />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant='outlined'
+                margin='none'
+                required
+                fullWidth
+                id='title'
+                label='구분 (교수 / 명예교수)'
+                name='title'
+                autoComplete='title'
+                {...title}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant='outlined'
+                margin='none'
+                required
+                fullWidth
+                id='position'
+                label='직위'
+                name='position'
+                autoComplete='position'
+                {...position}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl
+                variant='outlined'
+                required
+                fullWidth
+                disabled={queryLoading}
+              >
+                <InputLabel ref={inputLabel} id='majorName-label'>
+                  전공
+                </InputLabel>
+                <Select
+                  labelId='majorName-label'
+                  id='majorName'
+                  fullWidth
+                  {...majorName}
+                  labelWidth={labelWidth}
+                >
+                  {!queryLoading &&
+                    queryData &&
+                    queryData.seeAllMajor &&
+                    queryData.seeAllMajor.map(row => (
+                      <MenuItem key={row.name} value={row.name}>
+                        {row.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -82,32 +145,6 @@ export default args => {
                 name='workPhone'
                 autoComplete='workPhone'
                 {...workPhone}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant='outlined'
-                margin='none'
-                required
-                fullWidth
-                id='position'
-                label='구분 (교수 / 명예교수)'
-                name='position'
-                autoComplete='position'
-                {...position}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant='outlined'
-                margin='none'
-                required
-                fullWidth
-                id='title'
-                label='직책 / 학과'
-                name='title'
-                autoComplete='title'
-                {...title}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

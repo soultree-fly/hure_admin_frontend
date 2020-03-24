@@ -38,6 +38,11 @@ yarn start
 
 ---
 
+- [ ] Create major
+- [x] Major list
+
+---
+
 - [x] Create graduated year
 - [x] Graduated year list
 - [x] Delete graduated year

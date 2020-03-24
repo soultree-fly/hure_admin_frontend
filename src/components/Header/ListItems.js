@@ -9,8 +9,9 @@ import {
   UsersIcon,
   RequestIcon,
   ProfessorIcon,
-  NoticeIcon,
-  GraduateIcon
+  MajorIcon,
+  GraduateIcon,
+  NoticeIcon
 } from '../Icons';
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +46,14 @@ export const MainListItems = () => {
             <ProfessorIcon />
           </ListItemIcon>
           <ListItemText primary='Professors' />
+        </ListItem>
+      </Link>
+      <Link to='/majors' className={classes.link}>
+        <ListItem button>
+          <ListItemIcon>
+            <MajorIcon />
+          </ListItemIcon>
+          <ListItemText primary='Majors' />
         </ListItem>
       </Link>
       <Link to='/gradyears' className={classes.link}>

@@ -12,6 +12,7 @@ import NewProfessor from 'routes/prof/NewProfessor';
 import Professor from 'routes/prof/Professor';
 import EditProfessor from 'routes/prof/EditProfessor';
 import Professors from 'routes/prof/Professors';
+import Majors from 'routes/major/Majors';
 import NewGradYear from 'routes/gradyear/NewGradYear';
 import GraduatedYears from 'routes/gradyear/GraduatedYears';
 import NewNotice from 'routes/notice/NewNotice';
@@ -33,6 +34,7 @@ const SignedInRoutes = () => (
         <Route exact path='/profs/:id' component={Professor} />
         <Route exact path='/profs/:id/edit' component={EditProfessor} />
         <Route exact path='/profs' component={Professors} />
+        <Route exact path='/majors' component={Majors} />
         <Route exact path='/gradyears/new' component={NewGradYear} />
         <Route exact path='/gradyears' component={GraduatedYears} />
         <Route exact path='/notices/new' component={NewNotice} />

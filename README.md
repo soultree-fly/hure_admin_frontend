@@ -38,8 +38,9 @@ yarn start
 
 ---
 
-- [ ] Create major
+- [x] Create major
 - [x] Major list
+- [ ] Edit major
 
 ---
 

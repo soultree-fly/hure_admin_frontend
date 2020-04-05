@@ -18,10 +18,11 @@ export default () => {
     }
   }, [data, setToken]);
 
-  // FIXME: If once error message exist, it comes up always.
-  if (error) {
-    toast.error('Username or password is wrong. Please try again.');
-  }
+  useEffect(() => {
+    if (error) {
+      toast.error('Username or password is wrong. Please try again.');
+    }
+  }, [error]);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -31,7 +32,7 @@ export default () => {
       toast.error("Password can't be empty string.");
     } else {
       getToken({
-        variables: { username: username.value, password: password.value }
+        variables: { username: username.value, password: password.value },
       });
     }
   };

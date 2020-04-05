@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -83,6 +86,13 @@ export default () => {
               </Table>
             </TableContainer>
           </Grid>
+        </Grid>
+        <Grid container justify='flex-end' className={classes.buttonContainer}>
+          <Link to='/councils/new'>
+            <Button variant='contained' color='primary'>
+              원우회 추가
+            </Button>
+          </Link>
         </Grid>
       </Container>
     </>

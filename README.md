@@ -50,7 +50,7 @@ yarn start
 
 ---
 
-- [ ] Create executive
+- [x] Create executive
 - [x] Executive list
 - [ ] Delete executive
 

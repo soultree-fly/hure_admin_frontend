@@ -16,6 +16,7 @@ import NewMajor from 'routes/major/NewMajor';
 import Majors from 'routes/major/Majors';
 import NewGradYear from 'routes/gradyear/NewGradYear';
 import GraduatedYears from 'routes/gradyear/GraduatedYears';
+import NewCouncil from 'routes/council/NewCouncil';
 import Councils from 'routes/council/Councils';
 import NewNotice from 'routes/notice/NewNotice';
 import Notice from 'routes/notice/Notice';
@@ -40,6 +41,7 @@ const SignedInRoutes = () => (
         <Route exact path='/majors' component={Majors} />
         <Route exact path='/gradyears/new' component={NewGradYear} />
         <Route exact path='/gradyears' component={GraduatedYears} />
+        <Route exact path='/councils/new' component={NewCouncil} />
         <Route exact path='/councils' component={Councils} />
         <Route exact path='/notices/new' component={NewNotice} />
         <Route exact path='/notices/:id' component={Notice} />

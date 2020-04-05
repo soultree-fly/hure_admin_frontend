@@ -16,6 +16,7 @@ import NewMajor from 'routes/major/NewMajor';
 import Majors from 'routes/major/Majors';
 import NewGradYear from 'routes/gradyear/NewGradYear';
 import GraduatedYears from 'routes/gradyear/GraduatedYears';
+import Councils from 'routes/council/Councils';
 import NewNotice from 'routes/notice/NewNotice';
 import Notice from 'routes/notice/Notice';
 import EditNotice from 'routes/notice/EditNotice';
@@ -39,6 +40,7 @@ const SignedInRoutes = () => (
         <Route exact path='/majors' component={Majors} />
         <Route exact path='/gradyears/new' component={NewGradYear} />
         <Route exact path='/gradyears' component={GraduatedYears} />
+        <Route exact path='/councils' component={Councils} />
         <Route exact path='/notices/new' component={NewNotice} />
         <Route exact path='/notices/:id' component={Notice} />
         <Route exact path='/notices/:id/edit' component={EditNotice} />
@@ -61,7 +63,7 @@ const AppRouter = ({ isSignedIn }) => (
 );
 
 AppRouter.propTypes = {
-  isSignedIn: PropTypes.bool.isRequired
+  isSignedIn: PropTypes.bool.isRequired,
 };
 
 export default AppRouter;

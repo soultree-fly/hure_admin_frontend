@@ -11,13 +11,14 @@ import {
   ProfessorIcon,
   MajorIcon,
   GraduateIcon,
-  NoticeIcon
+  CouncilIcon,
+  NoticeIcon,
 } from '../Icons';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   link: {
-    color: 'rgba(0, 0, 0, 0.87)'
-  }
+    color: 'rgba(0, 0, 0, 0.87)',
+  },
 }));
 
 export const MainListItems = () => {
@@ -62,6 +63,14 @@ export const MainListItems = () => {
             <GraduateIcon />
           </ListItemIcon>
           <ListItemText primary='Graduated Years' />
+        </ListItem>
+      </Link>
+      <Link to='/councils' className={classes.link}>
+        <ListItem button>
+          <ListItemIcon>
+            <CouncilIcon />
+          </ListItemIcon>
+          <ListItemText primary='Councils' />
         </ListItem>
       </Link>
       <Link to='/notices' className={classes.link}>

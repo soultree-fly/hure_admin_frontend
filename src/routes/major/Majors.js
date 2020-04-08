@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -52,6 +52,12 @@ const Loader = () => (
 export default () => {
   const { data, loading } = useQuery(SEE_ALL_MAJOR);
 
+  const history = useHistory();
+
+  const handleRowClick = (e, id) => {
+    history.push(`/majors/${id}/edit`);
+  };
+
   const classes = useStyles();
 
   return (
@@ -77,7 +83,11 @@ export default () => {
                   data &&
                   data.seeAllMajor &&
                   data.seeAllMajor.map(row => (
-                    <TableRow key={row.id}>
+                    <TableRow
+                      hover
+                      key={row.id}
+                      onClick={e => handleRowClick(e, row.id)}
+                    >
                       <TableCell>{row.name}</TableCell>
                       <TableCell>{row.shortName}</TableCell>
                       <TableCell>{row.howManyUsers}</TableCell>

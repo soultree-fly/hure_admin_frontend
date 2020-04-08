@@ -23,6 +23,7 @@ const SEE_ALL_MAJOR = gql`
     seeAllMajor {
       id
       name
+      shortName
       howManyUsers
       howManyProfs
     }
@@ -32,6 +33,9 @@ const SEE_ALL_MAJOR = gql`
 const Loader = () => (
   <>
     <TableRow>
+      <TableCell>
+        <Skeleton animation='wave' />
+      </TableCell>
       <TableCell>
         <Skeleton animation='wave' />
       </TableCell>
@@ -62,6 +66,7 @@ export default () => {
               <TableHead>
                 <TableRow>
                   <TableCell>전공명</TableCell>
+                  <TableCell>짧은 전공명</TableCell>
                   <TableCell>재학생 + 졸업생 명수</TableCell>
                   <TableCell>교수 명수</TableCell>
                 </TableRow>
@@ -74,6 +79,7 @@ export default () => {
                   data.seeAllMajor.map(row => (
                     <TableRow key={row.id}>
                       <TableCell>{row.name}</TableCell>
+                      <TableCell>{row.shortName}</TableCell>
                       <TableCell>{row.howManyUsers}</TableCell>
                       <TableCell>{row.howManyProfs}</TableCell>
                     </TableRow>

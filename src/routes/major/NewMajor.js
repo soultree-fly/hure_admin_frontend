@@ -13,8 +13,8 @@ import useInput from 'hooks/useInput';
 import { useStyles } from 'Styles/NewStyles';
 
 const CREATE_MAJOR = gql`
-  mutation createMajor($name: String!) {
-    createMajor(name: $name) {
+  mutation createMajor($name: String!, $shortName: String!) {
+    createMajor(name: $name, shortName: $shortName) {
       id
     }
   }
@@ -26,6 +26,7 @@ export default () => {
   const [addMajor, { data, loading }] = useMutation(CREATE_MAJOR);
 
   const name = useInput('');
+  const shortName = useInput('');
 
   if (data && data.createMajor && data.createMajor.id) {
     toast.success('등록이 완료되었습니다.');
@@ -36,8 +37,9 @@ export default () => {
     try {
       await addMajor({
         variables: {
-          name: name.value
-        }
+          name: name.value,
+          shortName: shortName.value,
+        },
       });
     } catch {
       toast.error('Upload 실패. 나중에 다시 시도해주십시오.');
@@ -75,12 +77,24 @@ export default () => {
                 margin='none'
                 required
                 fullWidth
-                id='major'
-                label='전공'
-                name='major'
-                autoComplete='major'
-                autoFocus
+                id='majorName'
+                label='전공명'
+                name='majorName'
+                autoComplete='majorName'
                 {...name}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant='outlined'
+                margin='none'
+                required
+                fullWidth
+                id='majorShortName'
+                label='짧은 전공명'
+                name='majorShortName'
+                autoComplete='majorShortName'
+                {...shortName}
               />
             </Grid>
             <Grid item xs='auto' sm={4} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const UsersIcon = (color) => (
+export const UsersIcon = color => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width='24'
@@ -12,7 +12,7 @@ export const UsersIcon = (color) => (
   </svg>
 );
 
-export const RequestIcon = (color) => (
+export const RequestIcon = color => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width='24'
@@ -24,7 +24,7 @@ export const RequestIcon = (color) => (
   </svg>
 );
 
-export const ProfessorIcon = (color) => (
+export const ProfessorIcon = color => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width='24'
@@ -36,7 +36,7 @@ export const ProfessorIcon = (color) => (
   </svg>
 );
 
-export const MajorIcon = (color) => (
+export const MajorIcon = color => (
   <svg
     width='24'
     height='24'
@@ -49,7 +49,7 @@ export const MajorIcon = (color) => (
   </svg>
 );
 
-export const GraduateIcon = (color) => (
+export const GraduateIcon = color => (
   <svg
     width='24'
     height='24'
@@ -62,7 +62,7 @@ export const GraduateIcon = (color) => (
   </svg>
 );
 
-export const CouncilIcon = (color) => (
+export const CouncilIcon = color => (
   <svg
     width='24'
     height='24'
@@ -75,7 +75,7 @@ export const CouncilIcon = (color) => (
   </svg>
 );
 
-export const NoticeIcon = (color) => (
+export const NoticeIcon = color => (
   <svg
     width='24'
     height='24'
@@ -85,5 +85,17 @@ export const NoticeIcon = (color) => (
     fill={color}
   >
     <path d='M12.399 2.276c-.208-.63.264-1.276.919-1.276.405 0 .783.257.918.664l5.691 14.286c.169.509-.106 1.057-.613 1.226-.507.169-1.055-.106-1.224-.614 0 0-3.593-1.203-7.854.211l2.801 4.354c.291.428.088 1.013-.396 1.173l-1.904.634c-.131.044-.267.066-.401.066-.357 0-.705-.152-.951-.429l-3.85-4.247c-2.096.661-4.468-.102-5.26-2.076-.182-.453-.275-.936-.275-1.421 0-1.407.786-2.842 2.492-3.68 8.541-4.194 9.907-8.871 9.907-8.871m6.067.913c1.518.641 2.789 1.865 3.459 3.516.669 1.651.607 3.42-.034 4.94l1.474.626c.415-.985.635-2.053.635-3.141 0-3.167-1.873-6.133-4.911-7.419l-.623 1.478zm-1.064 2.523c.874.368 1.608 1.073 1.992 2.024.386.951.351 1.968-.017 2.843l1.436.61c.524-1.246.576-2.691.028-4.042-.547-1.352-1.588-2.352-2.831-2.877l-.608 1.442z' />
+  </svg>
+);
+
+export const InfoIcon = color => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill={color}
+  >
+    <path d='M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-.001 5.75c.69 0 1.251.56 1.251 1.25s-.561 1.25-1.251 1.25-1.249-.56-1.249-1.25.559-1.25 1.249-1.25zm2.001 12.25h-4v-1c.484-.179 1-.201 1-.735v-4.467c0-.534-.516-.618-1-.797v-1h3v6.265c0 .535.517.558 1 .735v.999z' />
   </svg>
 );

@@ -24,6 +24,7 @@ import Notice from 'routes/notice/Notice';
 import EditNotice from 'routes/notice/EditNotice';
 import Notices from 'routes/notice/Notices';
 import Header from './Header';
+import adminInfo from 'routes/adminInfo';
 
 const SignedInRoutes = () => (
   <>
@@ -49,6 +50,7 @@ const SignedInRoutes = () => (
         <Route exact path='/notices/:id' component={Notice} />
         <Route exact path='/notices/:id/edit' component={EditNotice} />
         <Route exact path='/notices' component={Notices} />
+        <Route exact path='/admin-info' component={adminInfo} />
         <Redirect from='*' to='/users' />
       </Switch>
     </Header>

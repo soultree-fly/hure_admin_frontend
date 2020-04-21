@@ -13,9 +13,10 @@ import {
   GraduateIcon,
   CouncilIcon,
   NoticeIcon,
+  InfoIcon,
 } from '../Icons';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   link: {
     color: 'rgba(0, 0, 0, 0.87)',
   },
@@ -79,6 +80,14 @@ export const MainListItems = () => {
             <NoticeIcon />
           </ListItemIcon>
           <ListItemText primary='Notices' />
+        </ListItem>
+      </Link>
+      <Link to='/admin-info' className={classes.link}>
+        <ListItem button>
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary='Admin Info' />
         </ListItem>
       </Link>
     </div>
